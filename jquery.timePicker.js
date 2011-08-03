@@ -102,7 +102,6 @@
 
       // Try to find a time in the list that matches the entered time.
       var time = timeStringToDate(elm.value, settings);
-      console.log(time);
       if( ! time) {
          time = defaultSelected;
       }
