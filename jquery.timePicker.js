@@ -101,7 +101,11 @@
       $tpDiv.show();
 
       // Try to find a time in the list that matches the entered time.
-      var time = elm.value ? timeStringToDate(elm.value, settings) : defaultSelected;
+      var time = timeStringToDate(elm.value, settings);
+      console.log(time);
+      if( ! time) {
+         time = defaultSelected;
+      }
       var startMin = startTime.getHours() * 60 + startTime.getMinutes();
       var min = (time.getHours() * 60 + time.getMinutes()) - startMin;
       var steps = Math.round(min / settings.step);
@@ -254,6 +258,9 @@
   function timeStringToDate(input, settings) {
     if (input) {
       var array = input.split(settings.separator);
+      if(array.length != 2) {
+        return null;
+      }
       var hours = parseFloat(array[0]);
       var minutes = parseFloat(array[1]);
 
