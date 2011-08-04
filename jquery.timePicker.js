@@ -110,7 +110,11 @@
       var steps = Math.round(min / settings.step);
       var roundTime = normaliseTime(new Date(0, 0, 0, 0, (steps * settings.step + startMin), 0));
       roundTime = (startTime < roundTime && roundTime <= endTime) ? roundTime : startTime;
-      var $matchedTime = $("li:contains(" + formatTime(roundTime, settings) + ")", $tpDiv);
+      
+      var roundTimeText = formatTime(roundTime, settings);
+      var $matchedTime = $("li", $tpDiv).filter(function(idx) {
+        return $.trim($(this).text()) == roundTimeText;
+      });
 
       if ($matchedTime.length) {
         $matchedTime.addClass(selectedClass);
